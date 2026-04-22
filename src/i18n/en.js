@@ -50,15 +50,19 @@ export const en = {
     id: 'case-study',
     quickFacts: [
       { label: 'Company', value: 'Decomat S.R.L.' },
-      { label: 'Period', value: 'Mar 2025 - Mar 2026' },
+      { label: 'Period', value: 'Mar 2025 – Mar 2026' },
       { label: 'System type', value: 'Commercial, inventory and delivery management' },
-      { label: 'Scope', value: 'Sales, quotations, materials, deliveries and role-based security' },
+      { label: 'Scope', value: 'Sales, quotations, materials, deliveries, and role-based security' },
       { label: 'Backend', value: 'Java 17, Spring Boot, JWT, JPA, MySQL' },
     ],
     sectionLabel: 'Featured experience',
     title: 'Commercial, Inventory and Delivery Management System for Decomat S.R.L.',
     summary:
-      'A full-stack solution built for a real company, focused on organizing commercial operations, inventory, quotations, and deliveries with concrete business rules and maintainable architecture.',
+      'A full-stack solution built for a real company, focused on organizing commercial operations, inventory, quotations, and deliveries through concrete business rules and maintainable architecture.',
+    repo: {
+      label: 'View project repository',
+      href: 'https://github.com/Pipe-Garcia/store-app',
+    },
     context: {
       title: 'Context',
       body:
@@ -86,11 +90,11 @@ export const en = {
     featureTitle: 'Main capabilities',
     features: [
       'Sales and quotation management connected to real commercial logic.',
-      'Materials, inventory, and relevant stock operations for the business.',
+      'Materials, inventory, and relevant stock operations.',
       'Delivery coordination within the broader operational flow.',
       'Structured customer and supplier management.',
       'Authentication, authorization, and role-based security.',
-      'Real business rules embedded into the system workflows.',
+      'Real business rules embedded into system workflows.',
     ],
     stackTitle: 'Stack',
     stack: [
@@ -186,8 +190,8 @@ export const en = {
     intro:
       'More than collecting technologies, I care about building software that is clear, extensible, and aligned with real needs.',
     principles: [
-      'Understand the domain, business rules, and operating flow before implementation.',
-      'Separate responsibilities to make maintenance, reading, and evolution easier.',
+      'Understand the domain, business rules, and operational flow before implementation.',
+      'Separate responsibilities to make maintenance, readability, and evolution easier.',
       'Avoid unnecessary complexity when a simpler solution solves the problem better.',
       'Treat security as a design concern from the start, not as a late add-on.',
       'Build with a realistic mindset: extensible, clear software that supports concrete operations.',

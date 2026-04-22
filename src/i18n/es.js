@@ -58,7 +58,11 @@ export const es = {
     sectionLabel: 'Experiencia destacada',
     title: 'Sistema de gestión comercial, stock y entregas para Decomat S.R.L.',
     summary:
-      'Desarrollo de una solución full-stack para una empresa real, enfocada en ordenar operaciones comerciales, stock, presupuestos y entregas con reglas de negocio concretas y arquitectura mantenible.',  
+      'Desarrollo de una solución full-stack para una empresa real, enfocada en ordenar operaciones comerciales, stock, presupuestos y entregas con reglas de negocio concretas y arquitectura mantenible.',
+    repo: {
+      label: 'Ver repositorio del proyecto',
+      href: 'https://github.com/Pipe-Garcia/store-app',
+    },  
     context: {
       title: 'Contexto',
       body:

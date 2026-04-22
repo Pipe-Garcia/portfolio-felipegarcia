@@ -50,7 +50,7 @@ export const pt = {
     id: 'case-study',
     quickFacts: [
       { label: 'Empresa', value: 'Decomat S.R.L.' },
-      { label: 'Período', value: 'Mar 2025 - Mar 2026' },
+      { label: 'Período', value: 'Mar 2025 – Mar 2026' },
       { label: 'Tipo de sistema', value: 'Gestão comercial, estoque e entregas' },
       { label: 'Escopo', value: 'Vendas, orçamentos, materiais, entregas e segurança por papéis' },
       { label: 'Backend', value: 'Java 17, Spring Boot, JWT, JPA, MySQL' },
@@ -58,7 +58,11 @@ export const pt = {
     sectionLabel: 'Experiência em destaque',
     title: 'Sistema de gestão comercial, estoque e entregas para Decomat S.R.L.',
     summary:
-      'Uma solução full-stack construída para uma empresa real, focada em organizar operações comerciais, estoque, orçamentos e entregas com regras de negócio concretas e arquitetura sustentável.',
+      'Uma solução full-stack construída para uma empresa real, focada em organizar operações comerciais, estoque, orçamentos e entregas por meio de regras de negócio concretas e arquitetura sustentável.',
+    repo: {
+      label: 'Ver repositório do projeto',
+      href: 'https://github.com/Pipe-Garcia/store-app',
+    },
     context: {
       title: 'Contexto',
       body:
@@ -164,7 +168,7 @@ export const pt = {
           'Docker Compose',
           'Git',
           'Postman',
-          'Fluxos de trabalho orientados a entrega reproduzível',
+          'Fluxos de trabalho orientados à entrega reproduzível',
         ],
       },
       {
