@@ -2,7 +2,7 @@
 
 Portfolio profesional desarrollado con **React + Vite**, diseñado para presentar experiencia real de desarrollo full-stack con foco en **backend Java/Spring**, arquitectura mantenible, seguridad y software aplicado a operaciones de negocio.
 
-El sitio fue pensado como una pieza de presentación profesional, no como un portfolio genérico: incluye soporte multilenguaje, modo claro/oscuro, caso destacado con evidencia visual y una narrativa centrada en experiencia real construyendo software para **Decomat S.R.L.**
+El sitio fue pensado como una pieza de presentación profesional: incluye soporte multilenguaje, modo claro/oscuro, caso destacado con evidencia visual y una narrativa centrada en experiencia real construyendo software para **Decomat S.R.L.**
 
 ---
 
@@ -10,7 +10,7 @@ El sitio fue pensado como una pieza de presentación profesional, no como un por
 
 Desplegado en Vercel.
 
-> Reemplazá esta línea por tu URL final de producción cuando quieras dejar el README cerrado.
+> https://portfolio-felipegarcia-ep6u5v029-pipe-garcias-projects.vercel.app/
 
 ---
 
