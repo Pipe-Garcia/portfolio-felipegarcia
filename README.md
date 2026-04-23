@@ -205,7 +205,8 @@ Flujo usado:
 
 ## Author
 
-**Felipe García**  
-Backend Java Developer  
-GitHub: `Pipe-Garcia`  
-LinkedIn: `felipe-garcía-dev`
+### 👤 Felipe Garcia - Java Backend Developer
+- 📧 <a href="pipeg1069@gmail.com" target="_blank">pipeg1069@gmail.com</a>
+- 💼 <a href="https://www.linkedin.com/in/felipe-garc%C3%ADa-dev/" target="_blank">LinkedIn</a>
+- 🐙 <a href="https://github.com/Pipe-Garcia" target="_blank">GitHub</a>
+
