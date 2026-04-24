@@ -1,4 +1,8 @@
-export function Contact({ content, links }) {
+import { getCvLinkByLanguage } from '../../data/links';
+
+export function Contact({ content, links, language }) {
+  const cvHref = getCvLinkByLanguage(language);
+
   return (
     <section id={content.id} className="section section-contact">
       <div className="shell">
@@ -32,6 +36,13 @@ export function Contact({ content, links }) {
               <p className="contact-label">GitHub</p>
               <a href={links.github.href} target="_blank" rel="noreferrer">
                 {links.github.label}
+              </a>
+            </article>
+
+            <article className="contact-card">
+              <p className="contact-label">{content.cvLabel}</p>
+              <a href={cvHref} target="_blank" rel="noreferrer">
+                {content.cvCta}
               </a>
             </article>
 

@@ -218,12 +218,13 @@ export function FeaturedCaseStudy({ content, media }) {
           {content.repo ? (
             <div className="case-study-actions">
               <a
-                className="button button-secondary"
+                className="button button-secondary button-repo"
                 href={content.repo.href}
                 target="_blank"
                 rel="noreferrer"
               >
-                {content.repo.label}
+                <span>{content.repo.label}</span>
+                <span className="button-repo-icon" aria-hidden="true">↗</span>
               </a>
             </div>
           ) : null}

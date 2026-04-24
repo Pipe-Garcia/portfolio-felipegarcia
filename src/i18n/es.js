@@ -27,6 +27,7 @@ export const es = {
       'Desarrollo soluciones con Java y Spring Boot aplicadas a ventas, stock, entregas, seguridad y lógica de negocio, con foco en APIs mantenibles y arquitectura clara.',
     primaryCta: 'Ver experiencia destacada',
     secondaryCta: 'Contacto',
+    cvCta: 'Descargar CV',
     panelLabel: 'Resumen profesional',
     highlights: [
       {
@@ -237,6 +238,8 @@ export const es = {
     description:
       'Si querés conversar sobre backend con Java, APIs, arquitectura mantenible o una oportunidad profesional, este portfolio está preparado para abrir esa conversación de forma directa.',
     cta: 'Escribime o conectemos',
+    cvLabel: 'CV',
+    cvCta: 'Descargar CV',
     availability:
       'Abierto a conversaciones sobre backend Java, APIs, arquitectura y oportunidades de desarrollo profesional.',
   },

@@ -1,4 +1,8 @@
-export function Hero({ content }) {
+import { getCvLinkByLanguage } from '../../data/links';
+
+export function Hero({ content, language }) {
+  const cvHref = getCvLinkByLanguage(language);
+
   return (
     <section id={content.id} className="hero section">
       <div className="shell hero-grid">
@@ -14,6 +18,14 @@ export function Hero({ content }) {
             </a>
             <a className="button button-secondary" href="#contact">
               {content.secondaryCta}
+            </a>
+            <a
+              className="button button-secondary"
+              href={cvHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {content.cvCta}
             </a>
           </div>
         </div>

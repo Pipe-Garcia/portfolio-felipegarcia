@@ -27,6 +27,7 @@ export const en = {
       'I build solutions with Java and Spring Boot applied to sales, inventory, deliveries, security, and business logic, with a focus on maintainable APIs and clear architecture.',
     primaryCta: 'View featured work',
     secondaryCta: 'Contact',
+    cvCta: 'Download CV',
     panelLabel: 'Professional summary',
     highlights: [
       {
@@ -237,6 +238,8 @@ export const en = {
     description:
       'If you want to talk about Java backend development, APIs, maintainable architecture, or a professional opportunity, this portfolio is set up to open that conversation directly.',
     cta: 'Let’s connect',
+    cvLabel: 'Resume',
+    cvCta: 'Download CV',
     availability:
       'Open to conversations about Java backend, APIs, architecture, and professional development opportunities.',
   },

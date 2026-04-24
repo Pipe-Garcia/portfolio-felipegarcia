@@ -4,8 +4,8 @@ export const siteLinks = {
     href: 'https://github.com/Pipe-Garcia/Pipe-Garcia',
   },
   linkedin: {
-    label: 'felipe-garcía-dev',
-    href: 'https://www.linkedin.com/in/felipe-garc%C3%ADa-dev/',
+    label: 'felipe-garcia-dev',
+    href: 'https://www.linkedin.com/in/felipe-garcia-dev/',
   },
   email: {
     label: 'Email',
@@ -13,3 +13,11 @@ export const siteLinks = {
     value: 'pipeg1069@gmail.com',
   },
 };
+
+export function getCvLinkByLanguage(language) {
+  if (language === 'es') {
+    return '/cv/CV_Felipe_Garcia_ES.pdf';
+  }
+
+  return '/cv/CV_Felipe_Garcia_EN.pdf';
+}

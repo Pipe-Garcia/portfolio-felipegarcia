@@ -1530,3 +1530,78 @@ button {
     min-width: 3.6rem;
   }
 }
+
+.hero-actions {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-actions .button {
+  min-width: fit-content;
+}
+
+.button {
+  gap: 0.5rem;
+}
+
+.button-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border-strong));
+  background: color-mix(in srgb, var(--accent-soft) 42%, var(--surface));
+}
+
+.button-repo:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-panel);
+}
+
+.button-repo-icon {
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0.9;
+  transform: translateY(-0.5px);
+}
+
+.case-study-actions .button {
+  min-height: 3.05rem;
+}
+
+.contact-grid .contact-card a,
+.case-study-actions .button,
+.hero-actions .button {
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .hero-actions {
+    gap: 0.6rem;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .case-study-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.screenshot-card figcaption strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.screenshot-card-clickable figcaption strong::after {
+  content: '↗';
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.contact-pill {
+  font-weight: 500;
+}

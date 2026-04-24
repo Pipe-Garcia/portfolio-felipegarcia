@@ -29,13 +29,13 @@ function App() {
       />
 
       <main>
-        <Hero content={t.hero} />
+        <Hero content={t.hero} language={language} />
         <FeaturedCaseStudy content={t.caseStudy} media={featuredProjectMedia} />
         <About content={t.about} />
         <Expertise content={t.expertise} />
         <WorkApproach content={t.workApproach} />
         <GrowthFocus content={t.growth} />
-        <Contact content={t.contact} links={siteLinks} />
+        <Contact content={t.contact} links={siteLinks} language={language} />
       </main>
     </div>
   );
