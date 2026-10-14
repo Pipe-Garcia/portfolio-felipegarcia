@@ -1,21 +1,25 @@
 export function WorkApproach({ content }) {
   return (
-    <section id={content.id} className="section">
-      <div className="shell approach-layout">
+    <section id="approach" className="section approach-section">
+      <div className="shell">
         <div className="section-heading">
-          <p className="section-eyebrow">{content.sectionLabel}</p>
+          <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
-          <p className="section-summary">{content.intro}</p>
         </div>
-
-        <div className="principles-list">
-          {content.principles.map((principle, index) => (
-            <article key={principle} className="principle-item principle-item-strong">
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <p>{principle}</p>
-            </article>
+        <ol className="build-steps">
+          {content.steps.map(([title, description], index) => (
+            <li key={title}>
+              <span className="step-number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
+        <p className="approach-closing">{content.closing}</p>
       </div>
     </section>
   );

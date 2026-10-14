@@ -1,48 +1,50 @@
 import { getCvLinkByLanguage } from '../../data/links';
+import { Icon } from '../Icon/Icon';
 
-export function Hero({ content, language }) {
-  const cvHref = getCvLinkByLanguage(language);
-
+export function Hero({ content, language, links }) {
   return (
-    <section id={content.id} className="hero section">
-      <div className="shell hero-grid">
-        <div className="hero-copy">
-          <p className="section-eyebrow">{content.eyebrow}</p>
-          <h1>{content.name}</h1>
-          <h2>{content.title}</h2>
+    <section id="hero" className="hero">
+      <div className="shell hero-inner">
+        <div className="hero-meta">
+          <p className="status">
+            <span className="status-dot" aria-hidden="true" />
+            {content.status}
+          </p>
+          <span className="hero-edition" aria-hidden="true">
+            PORTFOLIO / 2026
+          </span>
+        </div>
+        <p className="section-eyebrow">{content.eyebrow}</p>
+        <h1 tabIndex={-1}>{content.title}</h1>
+        <div className="hero-bottom">
           <p className="hero-description">{content.description}</p>
-
           <div className="hero-actions">
-            <a className="button button-primary" href="#case-study">
+            <a className="button button-primary" href="#projects">
               {content.primaryCta}
-            </a>
-            <a className="button button-secondary" href="#contact">
-              {content.secondaryCta}
+              <Icon name="arrow" />
             </a>
             <a
-              className="button button-secondary"
-              href={cvHref}
-              target="_blank"
-              rel="noreferrer"
+              className="button button-secondary action-cv"
+              href={getCvLinkByLanguage(language)}
+              aria-label={content.cvCta}
+              title={content.cvCta}
+              download
             >
-              {content.cvCta}
+              <Icon name="download" />
+              CV
+            </a>
+            <a
+              className="action-icon"
+              href={links.github.href}
+              aria-label={content.githubLabel}
+              title={content.githubLabel}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="github" />
             </a>
           </div>
         </div>
-
-        <aside className="hero-panel hero-panel-strong">
-          <p className="hero-panel-label">{content.panelLabel}</p>
-
-          <div className="hero-metrics">
-            {content.highlights.map((item) => (
-              <article key={item.title} className="metric-card">
-                <p className="metric-kicker">{item.title}</p>
-                <h3>{item.value}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </aside>
       </div>
     </section>
   );

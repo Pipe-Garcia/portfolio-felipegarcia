@@ -1,56 +1,56 @@
 import { getCvLinkByLanguage } from '../../data/links';
+import { Icon } from '../Icon/Icon';
 
 export function Contact({ content, links, language }) {
-  const cvHref = getCvLinkByLanguage(language);
-
   return (
-    <section id={content.id} className="section section-contact">
-      <div className="shell">
-        <div className="contact-panel contact-panel-strong">
-          <div className="contact-intro">
-            <div className="section-heading">
-              <p className="section-eyebrow">{content.sectionLabel}</p>
-              <h2>{content.title}</h2>
-              <p className="section-summary">{content.description}</p>
-            </div>
-
-            <a className="contact-pill" href={links.email.href}>
+    <section id="contact" className="section contact-section">
+      <div className="shell contact-layout">
+        <div className="section-heading">
+          <p className="section-eyebrow">{content.label}</p>
+          <h2>{content.title}</h2>
+        </div>
+        <div className="contact-copy">
+          <p>{content.description}</p>
+          <div className="contact-actions">
+            <a className="button button-primary" href={links.email.href}>
+              <Icon name="email" />
               {content.cta}
             </a>
+            <a
+              className="action-icon"
+              href={links.linkedin.href}
+              aria-label={content.linkedinLabel}
+              title={content.linkedinLabel}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="linkedin" />
+            </a>
+            <a
+              className="action-icon"
+              href={links.github.href}
+              aria-label={content.githubLabel}
+              title={content.githubLabel}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="github" />
+            </a>
+            <a
+              className="button button-secondary action-cv"
+              href={getCvLinkByLanguage(language)}
+              aria-label={content.cvCta}
+              title={content.cvCta}
+              download
+            >
+              <Icon name="download" />
+              CV
+            </a>
           </div>
-
-          <div className="contact-grid">
-            <article className="contact-card">
-              <p className="contact-label">Email</p>
-              <a href={links.email.href}>{links.email.value}</a>
-            </article>
-
-            <article className="contact-card">
-              <p className="contact-label">LinkedIn</p>
-              <a href={links.linkedin.href} target="_blank" rel="noreferrer">
-                {links.linkedin.label}
-              </a>
-            </article>
-
-            <article className="contact-card">
-              <p className="contact-label">GitHub</p>
-              <a href={links.github.href} target="_blank" rel="noreferrer">
-                {links.github.label}
-              </a>
-            </article>
-
-            <article className="contact-card">
-              <p className="contact-label">{content.cvLabel}</p>
-              <a href={cvHref} target="_blank" rel="noreferrer">
-                {content.cvCta}
-              </a>
-            </article>
-
-            <article className="contact-card contact-card-wide">
-              <p className="contact-label">Availability</p>
-              <p className="contact-note">{content.availability}</p>
-            </article>
-          </div>
+          <a className="contact-email" href={links.email.href}>
+            {links.email.value}
+          </a>
+          <p className="contact-location">{content.location}</p>
         </div>
       </div>
     </section>

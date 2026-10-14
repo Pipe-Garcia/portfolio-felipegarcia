@@ -5,12 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Portfolio profesional de Felipe García, desarrollador backend Java enfocado en sistemas reales de negocio."
+      content="Full-stack developer focused on Java, Spring Boot, React, REST APIs and business management systems."
     />
-    <title>Felipe García | Backend Java Developer</title>
+    <meta name="theme-color" content="#07110f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Felipe Garcia | Full-Stack Java &amp; React Developer</title>
+    <script>
+      // Apply the persisted theme before React paints.
+      try {
+        var savedTheme = localStorage.getItem('fg-portfolio-theme');
+        document.documentElement.dataset.theme = ['dark', 'light'].includes(
+          savedTheme,
+        )
+          ? savedTheme
+          : matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      } catch (_) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-  </html>
+</html>

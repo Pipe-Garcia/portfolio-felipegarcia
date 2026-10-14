@@ -1,246 +1,321 @@
 export const en = {
   meta: {
-    locale: 'EN',
+    description:
+      'Full-stack developer focused on Java, Spring Boot, React, REST APIs and business management systems.',
   },
   navigation: {
+    label: 'Main navigation',
+    languageLabel: 'Language',
+    menu: 'Menu',
+    close: 'Close',
+    skip: 'Skip to content',
+    cv: 'Download CV',
     items: [
-      { label: 'Home', href: '#hero' },
-      { label: 'Featured case', href: '#case-study' },
+      { label: 'Projects', href: '#projects' },
+      { label: 'Experience', href: '#experience' },
+      { label: 'Stack', href: '#stack' },
       { label: 'About', href: '#about' },
-      { label: 'Expertise', href: '#expertise' },
-      { label: 'How I work', href: '#approach' },
-      { label: 'Growth', href: '#growth' },
       { label: 'Contact', href: '#contact' },
     ],
-    languageLabel: 'Language',
     themeLabel: {
-      light: 'Light theme',
-      dark: 'Dark theme',
+      light: 'Switch to dark theme',
+      dark: 'Switch to light theme',
     },
   },
   hero: {
-    id: 'hero',
-    eyebrow: 'Backend Java Developer',
-    name: 'Felipe García',
-    title: 'Java Backend Developer building software for real business operations',
+    eyebrow: 'FULL-STACK SOFTWARE DEVELOPER',
+    status: 'Open to opportunities',
+    title: 'I build web products end to end for business operations.',
     description:
-      'I build solutions with Java and Spring Boot applied to sales, inventory, deliveries, security, and business logic, with a focus on maintainable APIs and clear architecture.',
-    primaryCta: 'View featured work',
-    secondaryCta: 'Contact',
+      'Full-stack developer with a strong Java/Spring Boot focus and experience taking products from requirements and domain modeling through frontend, testing, deployment, and production operations.',
+    primaryCta: 'View projects',
     cvCta: 'Download CV',
-    panelLabel: 'Professional summary',
-    highlights: [
-      {
-        title: 'Applied experience',
-        value: 'Decomat S.R.L.',
-        description: 'A system developed for a real company, centered on concrete commercial operations.',
-      },
-      {
-        title: 'Main stack',
-        value: 'Java · Spring Boot · JWT · MySQL',
-        description: 'Business-oriented backend development with security and maintainable persistence.',
-      },
-      {
-        title: 'Current focus',
-        value: 'Testing · CI/CD · React',
-        description: 'Deepening professional practices to improve quality and delivery.',
-      },
-    ],
+    githubLabel: 'Felipe Garcia on GitHub',
   },
-  caseStudy: {
-    id: 'case-study',
-    quickFacts: [
-      { label: 'Company', value: 'Decomat S.R.L.' },
-      { label: 'Period', value: 'Mar 2025 – Mar 2026' },
-      { label: 'System type', value: 'Commercial, inventory and delivery management' },
-      { label: 'Scope', value: 'Sales, quotations, materials, deliveries, and role-based security' },
-      { label: 'Backend', value: 'Java 17, Spring Boot, JWT, JPA, MySQL' },
-    ],
-    sectionLabel: 'Featured experience',
-    title: 'Commercial, Inventory and Delivery Management System for Decomat S.R.L.',
-    summary:
-      'A full-stack solution built for a real company, focused on organizing commercial operations, inventory, quotations, and deliveries through concrete business rules and maintainable architecture.',
-    repo: {
-      label: 'View project repository',
-      href: 'https://github.com/Pipe-Garcia/store-app',
+  proof: [
+    { title: '2 systems for clients', description: 'GymPlanner · Decomat' },
+    {
+      title: 'Production',
+      description: 'A product actively used by the client',
     },
-    context: {
-      title: 'Context',
-      body:
-        'The system was developed for Decomat S.R.L., a real company with concrete commercial and operational needs. This experience is presented as software built for real business processes, not as an isolated exercise.',
+    {
+      title: 'Core stack',
+      description: 'Java / Spring Boot · React / TypeScript · PostgreSQL',
     },
-    challenge: {
-      title: 'Business need',
-      body:
-        'The main need was to centralize operations related to sales, quotations, deliveries, customers, suppliers, and materials, incorporating business rules and inventory control into a coherent and maintainable foundation.',
-    },
-    solution: {
-      title: 'Solution delivered',
-      body:
-        'I built a platform with a Java 17 and Spring Boot backend, Spring Security with JWT, JPA/Hibernate and MySQL persistence, Flyway migrations, and a frontend built with HTML, CSS, and JavaScript. The system was designed to solve real workflows and support technical evolution with structural clarity.',
-    },
-    architectureTitle: 'Architecture and technical decisions',
-    architecturePoints: [
-      'Layered architecture to separate domain, data access, security, and endpoint exposure.',
-      'Domain modeling focused on commercial operations and inventory control, avoiding flat CRUD.',
-      'Spring Security with JWT and role-based access control to protect sensitive actions.',
-      'Persistence with JPA/Hibernate and schema versioning with Flyway to keep model traceability.',
-      'Docker Compose to simplify the execution environment and provide reproducible setup.',
-      'Clear frontend-backend integration with maintainability prioritized over unnecessary complexity.',
-    ],
-    featureTitle: 'Main capabilities',
-    features: [
-      'Sales and quotation management connected to real commercial logic.',
-      'Materials, inventory, and relevant stock operations.',
-      'Delivery coordination within the broader operational flow.',
-      'Structured customer and supplier management.',
-      'Authentication, authorization, and role-based security.',
-      'Real business rules embedded into system workflows.',
-    ],
-    stackTitle: 'Stack',
-    stack: [
-      'Java 17',
-      'Spring Boot',
-      'Spring Security + JWT',
-      'JPA / Hibernate',
-      'MySQL',
-      'Flyway',
-      'Maven',
-      'Docker Compose',
-      'HTML, CSS and JavaScript',
-    ],
-    highlightsTitle: 'Technical highlights',
-    highlights: [
-      'Real experience building software for a concrete business operation.',
-      'Backend-first approach focused on security, persistence, and non-trivial business rules.',
-      'Full-stack integration connecting frontend and backend in one solution.',
-      'A transferable case for environments where technical clarity, evolution, and robustness matter.',
-    ],
-    impactTitle: 'Learning and impact',
-    impact:
-      'This experience shaped the way I approach business software: understand the domain first, model real rules, separate responsibilities, and build a clear technical base that can sustain future evolution.',
+  ],
+  selectedWork: {
+    label: 'SELECTED WORK',
+    title: 'Software built for concrete business needs.',
+    description:
+      'Two projects that trace my growth as a developer: from commercial systems and business rules to the full-stack delivery of a product now running in production.',
+    cta: 'View full case study',
+    repository: 'Repository',
+    visualLabel: 'Explore the product',
   },
-  about: {
-    id: 'about',
-    sectionLabel: 'About',
-    title: 'Backend focused on structure, security, and useful software',
-    paragraphs: [
-      'I am a backend developer focused on Java and Spring Boot, with particular interest in REST APIs, business logic, and maintainable architecture.',
-      'I have already built a full-stack solution for a real business need, integrating backend, persistence, security, and frontend delivery with a practical and technical mindset.',
-      'I am currently deepening testing, CI/CD, React, and professional development practices to expand my delivery capacity without losing clarity or design judgment.',
-    ],
-    sideTitle: 'Current focus',
-    sideItems: [
-      'Backend with Java and Spring Boot',
-      'APIs with real business logic',
-      'Security, persistence, and maintainable design',
-      'Growth in testing, CI/CD, and professional engineering practices',
+  projects: {
+    gymplanner: {
+      repositoryLabel: 'View GymPlanner repository on GitHub',
+      title: 'GymPlanner',
+      lead: 'A full-stack platform for gym operations, developed alongside another developer and actively used by the client.',
+      description:
+        'Brings students, exercises, tags, training templates, personalized routines, and tracking history together in one web application.',
+      highlights: [
+        {
+          title: 'End-to-end delivery',
+          description: 'Discovery, architecture, backend, frontend, and data.',
+        },
+        {
+          title: 'Production engineering',
+          description: 'Testing, security, CI/CD, deployment, and monitoring.',
+        },
+        {
+          title: 'Operational value',
+          description: 'Routines, history, PDFs, and daily gym workflows.',
+        },
+      ],
+      caseStudy: [
+        {
+          title: 'Business need',
+          body: 'Organize gym management workflows in a web application: student information, exercise catalog, and training planning, with continuity in tracking.',
+        },
+        {
+          title: 'My role',
+          body: 'Co-developed alongside another developer. I worked end to end across requirements, domain analysis, technical design, backend, frontend, data, security, testing, PDF generation, and delivery. I also contributed to infrastructure, monitoring, hardening, debugging, and production support.',
+        },
+        {
+          title: 'Product and solution',
+          body: 'A platform connecting students, exercises, and templates with personalized routines and history. A React and TypeScript frontend consumes REST APIs from the Java 21 / Spring Boot backend, with PostgreSQL persistence.',
+        },
+        {
+          title: 'Key features',
+          items: [
+            'Student management and an exercise catalog with tags and filters.',
+            'Training templates and personalized routines.',
+            'Tracking history and history by exercise.',
+            'Routine PDF generation.',
+            'Authentication and role-based authorization.',
+          ],
+        },
+        {
+          title: 'Engineering',
+          body: 'Domain modeling, REST APIs, and persistence with Spring Data JPA / Hibernate. Flyway manages database migrations; React, TypeScript, and Vite structure the product interface.',
+        },
+        {
+          title: 'Testing and security',
+          body: 'Backend testing and validation of business workflows, authentication with Spring Security / JWT, and role-based authorization. Security was also part of hardening and production environment review.',
+        },
+        {
+          title: 'Production and delivery',
+          body: 'Docker and GitHub Actions support delivery, CI/CD, and cloud deployment. Operations include monitoring, diagnosing issues, fixes, and client support.',
+        },
+      ],
+      outcome:
+        'Delivered, deployed, and actively used by the client. A collaborative full-stack development experience spanning business understanding through production support.',
+      media: {
+        dashboard: [
+          'Gym dashboard',
+          'Product presentation and its main modules.',
+        ],
+        responsive: [
+          'Mobile dashboard',
+          'Presentation of the interface adapted to a mobile screen.',
+        ],
+        routines: [
+          'Routine management',
+          'Overview of routines assigned to students.',
+        ],
+        routine: [
+          'Routine detail',
+          'Days, blocks, and exercises, with PDF access.',
+        ],
+        students: [
+          'Student management',
+          'Student list with search and filters.',
+        ],
+        history: [
+          'Tracking history',
+          'Continuity of a student’s cycles and routines.',
+        ],
+        exerciseHistory: [
+          'History by exercise',
+          'Review of how and when an exercise was used.',
+        ],
+        exercises: [
+          'Exercise catalog',
+          'Exercises organized with tags and filters.',
+        ],
+        tags: ['Tag configuration', 'Classification of the exercise catalog.'],
+      },
+      mediaNote:
+        'The desktop and mobile dashboards are polished product showcase visuals; they do not necessarily reproduce every pixel of the current deployed version.',
+    },
+    decomat: {
+      repositoryLabel: 'View Decomat repository on GitHub',
+      title: 'Commercial and inventory management system',
+      lead: 'A full-stack system developed to centralize sales, quotations, materials, inventory, deliveries, and commercial operations for Decomat S.R.L.',
+      description:
+        'Starting from business requirements, the project evolved into a solution with commercial rules, role-based security, operation traceability, and frontend-backend integration.',
+      highlights: [
+        {
+          title: 'Business logic',
+          description:
+            'Connected sales, quotations, inventory, and deliveries.',
+        },
+        {
+          title: 'Security & control',
+          description: 'Roles, authentication, and auditing.',
+        },
+        {
+          title: 'Domain modeling',
+          description: 'Business rules beyond traditional CRUD.',
+        },
+      ],
+      caseStudy: [
+        {
+          title: 'Business need',
+          body: 'The main need was to centralize operations related to sales, quotations, deliveries, customers, suppliers, and materials, incorporating business rules and inventory control into a coherent and maintainable foundation.',
+        },
+        {
+          title: 'Role and context',
+          body: 'Design and development of a full-stack solution for Decomat S.R.L., based on concrete company processes and requirements, between March 2025 and March 2026.',
+        },
+        {
+          title: 'Solution delivered',
+          body: 'I built a platform with a Java 17 and Spring Boot backend, Spring Security with JWT, JPA/Hibernate and MySQL persistence, Flyway migrations, and a frontend built with HTML, CSS, and JavaScript.',
+        },
+        {
+          title: 'Business rules and workflows',
+          items: [
+            'Sales and quotation management connected to real commercial logic.',
+            'Materials, inventory, and relevant stock operations.',
+            'Delivery coordination within the broader operational flow.',
+            'Structured customer and supplier management.',
+            'Auditing and traceability of operations.',
+          ],
+        },
+        {
+          title: 'Architecture',
+          body: 'Layered architecture to separate domain, data access, security, and endpoint exposure. Domain modeling focused on commercial operations and inventory control. Clear frontend-backend integration with maintainability in mind.',
+        },
+        {
+          title: 'Security and data',
+          body: 'Spring Security with JWT and role-based access control to protect sensitive actions. Persistence with JPA/Hibernate and schema versioning with Flyway for model traceability. Docker Compose provides a reproducible execution environment.',
+        },
+      ],
+      outcome:
+        'This experience consolidated how I approach business software: understanding the domain first, modeling real rules, separating responsibilities, and building a clear technical foundation for future evolution.',
+      media: {
+        sales: [
+          'Sales management',
+          'Commercial operations with connected states and data.',
+        ],
+        dashboard: [
+          'Commercial dashboard',
+          'System overview and primary access points.',
+        ],
+        materials: [
+          'Inventory and materials',
+          'Inventory and core commercial operations.',
+        ],
+        saleDetail: [
+          'Sale detail',
+          'States, items, payments, and linked deliveries.',
+        ],
+        delivery: [
+          'Delivery detail',
+          'Delivered materials and operational tracking.',
+        ],
+        audit: ['Inventory audit', 'History of inventory movements.'],
+      },
+    },
+  },
+  experience: {
+    label: 'EXPERIENCE',
+    title: 'Experience building and delivering software.',
+    entries: [
+      {
+        period: '2026 — Present',
+        title: 'Full-Stack Developer',
+        company: 'Freelance',
+        description:
+          'Building web solutions for clients across the full product lifecycle: requirements, technical design, implementation, testing, deployment, and support.',
+        project: 'gymplanner',
+        cta: 'GymPlanner',
+      },
+      {
+        period: '2025 — 2026',
+        title: 'Java Backend / Full-Stack Developer',
+        company: 'Decomat S.R.L.',
+        description:
+          'Design and development of a commercial and inventory management system based on company processes and requirements.',
+        project: 'decomat',
+        cta: 'View project',
+      },
     ],
   },
   expertise: {
-    id: 'expertise',
-    sectionLabel: 'Core expertise',
-    title: 'Areas where I am building technical depth',
-    groups: [
-      {
-        title: 'Backend engineering',
-        items: [
-          'Java and Spring Boot',
-          'REST API design and implementation',
-          'DTOs, validation, and separation of responsibilities',
-          'Layered architecture',
-          'JPA / Hibernate and domain modeling',
-        ],
-      },
-      {
-        title: 'Security and persistence',
-        items: [
-          'Spring Security',
-          'JWT and role-based access control',
-          'MySQL',
-          'Flyway for versioned migrations',
-          'Persistence focused on consistency and maintainability',
-        ],
-      },
-      {
-        title: 'Delivery and tooling',
-        items: [
-          'Maven',
-          'Docker Compose',
-          'Git',
-          'Postman',
-          'Workflows oriented toward reproducible delivery',
-        ],
-      },
-      {
-        title: 'Frontend integration',
-        items: [
-          'HTML, CSS, and JavaScript',
-          'API consumption and interface state handling',
-          'Frontend-backend integration',
-          'Modular frontend organization',
-          'Simple interfaces focused on functional clarity',
-        ],
-      },
-    ],
+    label: 'TECHNICAL CAPABILITIES',
+    title: 'A stack for building the complete product.',
+    intro:
+      'My strongest depth is in Java/Spring Boot backend development, complemented by applied experience in frontend, data, testing, and delivery.',
   },
   workApproach: {
-    id: 'approach',
-    sectionLabel: 'How I work',
-    title: 'Principles I prioritize when building software',
-    intro:
-      'More than collecting technologies, I care about building software that is clear, extensible, and aligned with real needs.',
-    principles: [
-      'Understand the domain, business rules, and operational flow before implementation.',
-      'Separate responsibilities to make maintenance, readability, and evolution easier.',
-      'Avoid unnecessary complexity when a simpler solution solves the problem better.',
-      'Treat security as a design concern from the start, not as a late add-on.',
-      'Build with a realistic mindset: extensible, clear software that supports concrete operations.',
+    label: 'HOW I BUILD',
+    title: 'From problem to production.',
+    steps: [
+      ['Discover', 'Understand processes and constraints.'],
+      ['Design', 'Model the domain and architecture.'],
+      ['Build', 'Backend, frontend, and data.'],
+      ['Validate', 'Testing, security, and review.'],
+      ['Deploy', 'CI/CD and infrastructure.'],
+      ['Operate', 'Monitor, fix, and evolve.'],
     ],
+    closing:
+      'I want technical decisions to serve a purpose: clear, maintainable, secure software that is useful for the operation it supports.',
   },
-  growth: {
-    id: 'growth',
-    sectionLabel: 'Growth / current focus',
-    title: 'Areas I am deepening right now',
-    intro:
-      'I am expanding my backend profile with practices that strengthen quality, deployment, and technical maturity.',
-    items: [
-      {
-        title: 'React',
-        description: 'To build interfaces that are more maintainable, scalable, and professional.',
-      },
-      {
-        title: 'Testing',
-        description: 'JUnit and Mockito to reinforce coverage, confidence, and quality in business logic.',
-      },
-      {
-        title: 'CI/CD',
-        description: 'Integration and delivery automation to move closer to more professional workflows.',
-      },
-      {
-        title: 'Deployment and environments',
-        description: 'Docker, reproducible execution, and deployment with better technical judgment.',
-      },
-      {
-        title: 'Observability',
-        description: 'Monitoring, traceability, and practices that improve real system operation.',
-      },
-      {
-        title: 'Professional maturity',
-        description: 'Engineering habits, documentation, and continuous improvement as a backend developer.',
-      },
+  about: {
+    label: 'ABOUT',
+    title: 'Software, business, and continuous improvement.',
+    paragraphs: [
+      'I hold a Higher Technician degree in Software Development and work as a full-stack developer with a strong specialization in Java/Spring Boot backend development.',
+      'I am especially interested in systems where technology directly supports an operation: understanding the problem, modeling it carefully, and turning it into maintainable software that can reach production and keep evolving.',
+      'I continue building freelance projects while looking to join an engineering team where I can contribute practical experience, deepen my knowledge, and grow alongside other developers.',
     ],
   },
   contact: {
-    id: 'contact',
-    sectionLabel: 'Contact',
-    title: 'Available for opportunities where thoughtful software matters',
+    label: 'CONTACT',
+    title: 'Let’s talk.',
     description:
-      'If you want to talk about Java backend development, APIs, maintainable architecture, or a professional opportunity, this portfolio is set up to open that conversation directly.',
-    cta: 'Let’s connect',
-    cvLabel: 'Resume',
+      'I am open to software development opportunities and projects where I can contribute in backend, full-stack development, and business management systems.',
+    cta: 'Send email',
     cvCta: 'Download CV',
-    availability:
-      'Open to conversations about Java backend, APIs, architecture, and professional development opportunities.',
+    githubLabel: 'Felipe Garcia on GitHub',
+    linkedinLabel: 'Felipe Garcia on LinkedIn',
+    location:
+      'Santa Fe, Argentina · Available for remote and hybrid opportunities.',
+  },
+  footer: {
+    role: 'Full-Stack Java/Spring Boot + React Developer',
+    top: 'Back to top',
+  },
+  casePage: {
+    label: 'PROJECT CASE STUDY',
+    back: 'Back to projects',
+    stack: 'Engineering / stack',
+    gallery: 'The product on screen',
+    outcome: 'Outcome and learning',
+    repository: 'View repository',
+    other: 'Next case study',
+    notFound: 'Project not found.',
+  },
+  gallery: {
+    open: 'Expand image',
+    close: 'Close image',
+    previous: 'Previous image',
+    next: 'Next image',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    reset: 'Reset zoom',
+    hint: 'Arrows to navigate · Double-click to zoom · Drag to pan · Escape to close',
   },
 };

@@ -3,27 +3,24 @@ import { useEffect, useState } from 'react';
 const THEME_STORAGE_KEY = 'fg-portfolio-theme';
 
 function getInitialTheme() {
-  const persistedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-
-  if (persistedTheme) {
-    return persistedTheme;
-  }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  try {
+    const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {}
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
 }
 
 export function useTheme() {
   const [theme, setTheme] = useState(getInitialTheme);
-
   useEffect(() => {
-    // El tema se resuelve vía data-attribute para que toda la hoja de estilos responda a tokens.
     document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {}
   }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'));
-  };
-
+  const toggleTheme = () =>
+    setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
   return { theme, toggleTheme };
 }

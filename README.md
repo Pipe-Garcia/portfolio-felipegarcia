@@ -1,212 +1,133 @@
-# Felipe García — Backend Technical Portfolio
+# Felipe Garcia | Full-Stack Portfolio V2.1
 
-Portfolio profesional desarrollado con **React + Vite**, diseñado para presentar experiencia real de desarrollo full-stack con foco en **backend Java/Spring**, arquitectura mantenible, seguridad y software aplicado a operaciones de negocio.
+Portfolio profesional con React, Vite y React Router. Presenta dos sistemas para clientes: GymPlanner, co-desarrollado y actualmente utilizado en producción, y el sistema de gestión comercial y stock de Decomat S.R.L.
 
-El sitio fue pensado como una pieza de presentación profesional: incluye soporte multilenguaje, modo claro/oscuro, caso destacado con evidencia visual y una narrativa centrada en experiencia real construyendo software para **Decomat S.R.L.**
+La V2 se trabaja localmente. Sitio publicado anterior: [portfolio-felipegarcia.vercel.app](https://portfolio-felipegarcia.vercel.app/).
 
----
+## Ejecutar
 
-## Live portfolio
+Usar Node 20.19+ o 22.12+ (validado con Node 24.15.0).
 
-Desplegado en Vercel.
-
-> https://portfolio-felipegarcia-ep6u5v029-pipe-garcias-projects.vercel.app/
-
----
-
-## Main purpose
-
-Este portfolio fue construido para:
-
-- presentar perfil profesional backend-first
-- mostrar experiencia real aplicada a una empresa
-- documentar un caso destacado de desarrollo full-stack
-- ofrecer una base visual profesional, clara y mantenible
-- servir como soporte para LinkedIn, CV y entrevistas
-
----
-
-## Featured case
-
-El eje principal del portfolio es un sistema de **gestión comercial, stock y entregas** desarrollado para **Decomat S.R.L.**
-
-### Stack del caso principal
-- Java 17
-- Spring Boot
-- Spring Security + JWT
-- JPA / Hibernate
-- MySQL
-- Flyway
-- Maven
-- Docker Compose
-- HTML, CSS y JavaScript
-
-### Alcance funcional
-- ventas
-- presupuestos
-- materiales
-- stock
-- entregas
-- clientes
-- proveedores
-- seguridad por roles
-- auditoría de movimientos
-
----
-
-## Tech stack of this portfolio
-
-- React
-- Vite
-- JavaScript
-- CSS
-- Vercel
-
----
-
-## Project structure
-
-```text
-src/
-  components/
-    About/
-    Contact/
-    Expertise/
-    FeaturedCaseStudy/
-    GrowthFocus/
-    Header/
-    Hero/
-    LanguageSwitcher/
-    ThemeToggle/
-    WorkApproach/
-  data/
-    links.js
-    projects.js
-  hooks/
-    useLanguage.js
-    useTheme.js
-  i18n/
-    es.js
-    en.js
-    pt.js
-  styles/
-    globals.css
-    tokens.css
-  App.jsx
-  main.jsx
-```
-
----
-
-## Available scripts
-
-### Install dependencies
 ```bash
 npm install
-```
-
-### Run in development mode
-```bash
 npm run dev
 ```
 
-### Generate production build
 ```bash
 npm run build
-```
-
-### Preview production build locally
-```bash
 npm run preview
 ```
 
----
+Los scripts existentes son `dev`, `build` y `preview`. No hay scripts de lint ni suite de tests en este repositorio.
 
-## Customization guide
-
-### Update personal/contact links
-Edit:
+## Arquitectura
 
 ```text
-src/data/links.js
+src/
+  App.jsx                          Rutas, composición y metadata
+  main.jsx                         Entrada y BrowserRouter
+  components/
+    Header/                        Navbar y MobileNavDrawer
+    Dialog/                        Foco, backdrop, Escape y scroll lock
+    Hero/                          Hero tipográfico
+    ProofStrip/                    Evidencia compacta
+    SelectedWork/                  Previews, badges y ProductVisual
+    Experience/                    Timeline profesional
+    Expertise/                     Capabilities y accordions mobile
+    WorkApproach/                  How I Build
+    About/
+    Contact/
+    Footer/
+    ProjectCaseStudy/               Plantilla compartida por proyecto
+    ScreenshotGallery/             Modal, navegación, zoom y pan
+    LanguageSwitcher/
+    ThemeToggle/
+  data/
+    links.js                       Enlaces reales y selección de CV
+    projects.js                    Slugs, stacks, badges y media
+  hooks/
+    useLanguage.js                 ES/EN/PT con persistencia
+    useTheme.js                    Tema con persistencia
+  i18n/
+    es.js / en.js / pt.js           Todo el copy por idioma
+    index.js                       Resolución de traducciones
+  styles/
+    tokens.css                     Fuentes, paletas y variables
+    globals.css                    Layouts y responsive
+public/
+  cv/                              PDF ES y EN
+  images/gymplanner/               Nueve WebP proporcionados
+  images/decomat-*.webp             Seis capturas existentes
+  favicon.svg
+vercel.json                        Rewrites de páginas de proyectos
 ```
 
-### Update texts by language
-Edit:
+## Contenido, links y diseño
 
-```text
-src/i18n/es.js
-src/i18n/en.js
-src/i18n/pt.js
-```
+- Textos: `src/i18n/es.js`, `en.js`, `pt.js`. Cada proyecto tiene un solo bloque en `projects[slug]`, usado por Home y case study.
+- Contacto: `src/data/links.js`. Los enlaces reales se preservan.
+- Stacks, orden de proyectos y medios: `src/data/projects.js`.
+- Paletas y tipografía: `src/styles/tokens.css`. Se mantienen las familias existentes y sus fallbacks locales, sin nuevas descargas de fuentes.
+- Espaciado, layouts y estados responsive: `src/styles/globals.css`.
+- Composición de Home, rutas y metadata: `src/App.jsx`.
 
-### Update screenshots and featured project media
-Edit:
+Idioma y tema usan las claves originales `fg-portfolio-language` y `fg-portfolio-theme`. El tema inicial respeta la preferencia del sistema si no existe una elección guardada. El selector también funciona cuando localStorage está bloqueado.
 
-```text
-src/data/projects.js
-```
+## CV
 
-Store image files in:
+Reemplazar los PDF en:
 
-```text
-public/images/
-```
+- `public/cv/CV_Felipe_Garcia_ES.pdf`
+- `public/cv/CV_Felipe_Garcia_EN.pdf`
 
-### Update colors, radii, shadows, and spacing
-Edit:
+ES descarga español. EN y PT descargan inglés. La selección está centralizada en `getCvLinkByLanguage`, en `src/data/links.js`. Los PDF adjuntos se copiaron sin alterar su contenido.
 
-```text
-src/styles/tokens.css
-```
+## Screenshots
 
-### Update layouts, section styling, modal behavior, and responsive rules
-Edit:
+Cada objeto en `projects.js` incluye `key`, `image`, `width` y `height`. La clave resuelve el título/alt y caption traducidos en `projects[slug].media[key]`.
 
-```text
-src/styles/globals.css
-```
+Para sumar una captura:
 
----
+1. Colocar el archivo WebP en `public/images/<proyecto>/`.
+2. Agregarlo a `screenshots` del proyecto, con sus dimensiones reales.
+3. Agregar su título y caption en ES, EN y PT.
 
-## Design decisions
+Home usa únicamente las dos primeras imágenes de GymPlanner (dashboard desktop y mobile) y la primera de Decomat (ventas). El resto está en las galerías. Las dimensiones reservan espacio; las imágenes bajo el fold usan lazy loading.
 
-Este portfolio prioriza:
+Los dashboards pulidos de GymPlanner se identifican como visuales de presentación en su case study. El PNG de referencia y la captura duplicada de historial no se distribuyen.
 
-- jerarquía visual clara
-- lectura profesional y compacta
-- identidad sobria y editorial
-- contenido orientado a empleabilidad
-- experiencia real por encima de “showcase” superficial
-- mantenibilidad y escalabilidad del código
+## Agregar proyectos
 
----
+1. Agregar un objeto a `projects` en `src/data/projects.js`, con slug, badges, stacks y screenshots.
+2. Agregar `projects[slug]` en los tres idiomas: title, lead, description, highlights, caseStudy, outcome y media.
+3. La ruta `/projects/<slug>` utiliza automáticamente la plantilla compartida.
 
-## Deployment
+Home muestra el array en orden. Si en el futuro se agregan más de los dos casos actuales, decidir explícitamente cuáles destacar y ajustar el enlace al siguiente caso según el recorrido deseado.
 
-El proyecto está preparado para desplegarse fácilmente en **Vercel**.
+## Rutas y hosting
 
-Flujo usado:
-1. desarrollo local con `npm run dev`
-2. validación con `npm run build`
-3. push a GitHub
-4. despliegue automático desde Vercel conectado al repositorio
+- `/`: Home.
+- `/projects/gymplanner`: caso principal.
+- `/projects/decomat`: segundo caso.
+- Rutas de proyecto desconocidas: estado de proyecto no encontrado y regreso a Home.
 
----
+Los enlaces del header usan `/#projects`, `/#experience`, `/#stack`, `/#about` y `/#contact`. Funcionan también desde páginas de proyecto.
 
-## Notes
+`vercel.json` reescribe `/projects/:path*` a `index.html` para acceso directo y refresh. Assets, imágenes y PDF mantienen sus rutas. En otro hosting configurar el fallback equivalente para esas páginas.
 
-- `node_modules/` y `dist/` no deben versionarse
-- el proyecto usa persistencia local para idioma y tema
-- la galería del caso destacado incluye modal con navegación y zoom
-- la versión final puede ampliarse con nuevos proyectos o dominio propio
+## Responsive y accesibilidad
 
----
+- Desde 1100 px: Hero con presencia de portada, proyectos alternados, una timeline continua de experiencia, capabilities en cinco columnas y proceso horizontal.
+- 768–1099 px: drawer; entre 768 y 899 px los previews usan composición editorial en dos columnas de texto sobre la imagen, capabilities en dos columnas.
+- Bajo 768 px: timeline vertical, capabilities con `details/summary`, proceso vertical y composición de producto apilada.
 
-## Author
+El proof integra el cierre del Hero. Los fondos se agrupan en tres macrozonas: intro/productos, ingeniería y persona/contacto. Las únicas cifras ordinales están en los seis pasos de How I Build. Los repositorios están centralizados en `projects.js` y aparecen en Home y case studies.
 
-### 👤 Felipe Garcia - Java Backend Developer
-- 📧 <a href="pipeg1069@gmail.com" target="_blank">pipeg1069@gmail.com</a>
-- 💼 <a href="https://www.linkedin.com/in/felipe-garc%C3%ADa-dev/" target="_blank">LinkedIn</a>
-- 🐙 <a href="https://github.com/Pipe-Garcia" target="_blank">GitHub</a>
+Los diálogos nativos mantienen el fondo inerte, cierran con Escape y click fuera, bloquean scroll y restauran foco. Se refuerza el ciclo de Tab. La galería conserva flechas, zoom, rueda, doble clic, pan con mouse/touch y reset con 0. Se respeta `prefers-reduced-motion`.
+
+## Validación local
+
+El reporte de la iteración actual está en [V2.1-REPORT.md](V2.1-REPORT.md); el historial de implementación V2 se conserva en [V2-REPORT.md](V2-REPORT.md). Las capturas y scripts puntuales de revisión están en `.qa/`, ignorados por Git y fuera del sitio distribuido.
+
+No se realizó commit, push ni deploy durante este refactor.
 
