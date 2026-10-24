@@ -1,0 +1,46 @@
+# Base44 sandbox environment for this repo.
+# Runs the Vite dev server straight from the cloned source so edits appear live.
+# No external services or credentials are required by this project.
+services:
+  web:
+    image: node:22
+    working_dir: /app
+    # Dependencies live in a volume so they are installed on startup from the
+    # lockfile, never baked into a prebuilt image.
+    command:
+      - sh
+      - -ec
+      - |
+        npm ci --no-audit --no-fund
+        exec npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
+    ports:
+      - "3000:5173"
+    environment:
+      # Bare pass-through: the platform provides both values.
+      # Vite >= 6.1 appends __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS to
+      # server.allowedHosts, which the preview proxy's Host header requires.
+      - BASE44_PREVIEW_MODE
+      - __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - npm_cache:/root/.npm
+    healthcheck:
+      # Real responsiveness probe: fetch the dev server root over HTTP.
+      test:
+        - CMD-SHELL
+        - >-
+          node -e "fetch('http://127.0.0.1:5173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+    restart: on-failure
+    labels:
+      base44.project: "Felipe Garcia Portfolio"
+      base44.kind: "web"
+      base44.port: "3000"
+
+volumes:
+  node_modules:
+  npm_cache:
