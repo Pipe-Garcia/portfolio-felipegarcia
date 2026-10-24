@@ -1,11 +1,12 @@
 import { getCvLinkByLanguage } from '../../data/links';
 import { Icon } from '../Icon/Icon';
-import { ProductVisual } from '../SelectedWork/SelectedWork';
 import { projects } from '../../data/projects';
 
 export function Hero({ content, language, links, projectCopy }) {
   const showcase = projects.find((project) => project.slug === 'gymplanner');
   const showcaseCopy = projectCopy?.['gymplanner'];
+  const desktop = showcase?.screenshots[0];
+  const mobile = showcase?.screenshots[1];
   return (
     <section id="hero" className="hero">
       <div className="shell hero-inner">
@@ -52,7 +53,36 @@ export function Hero({ content, language, links, projectCopy }) {
         {showcase && showcaseCopy && (
           <div className="hero-visual">
             <span className="hero-visual-grid" aria-hidden="true" />
-            <ProductVisual project={showcase} copy={showcaseCopy} eager />
+            <div className="hero-product">
+              <div className="hero-product-desktop">
+                <div className="screen-chrome" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                  <span>GymPlanner</span>
+                </div>
+                <img
+                  src={desktop.image}
+                  alt={showcaseCopy.media[desktop.key][0]}
+                  width={desktop.width}
+                  height={desktop.height}
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              {mobile && (
+                <div className="hero-product-mobile">
+                  <img
+                    src={mobile.image}
+                    alt={showcaseCopy.media[mobile.key][0]}
+                    width={mobile.width}
+                    height={mobile.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

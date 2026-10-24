@@ -22,8 +22,11 @@ export function ProjectCaseStudy({ translations: t }) {
   return (
     <article className="case-page">
       <section className="case-hero shell">
-        <Link className="text-link case-back" to="/#projects">
-          ← {t.casePage.back}
+        <Link className="text-link case-back link-back" to="/#projects">
+          <span className="link-arrow" aria-hidden="true">
+            ←
+          </span>
+          {t.casePage.back}
         </Link>
         <p className="section-eyebrow">{t.casePage.label}</p>
         <ProjectBadges project={project} />
@@ -96,17 +99,25 @@ export function ProjectCaseStudy({ translations: t }) {
           </div>
           <div>
             <p>{copy.outcome}</p>
-            <Link className="text-link" to={'/projects/' + other.slug}>
-              {t.casePage.other}: {t.projects[other.slug].title} →
-            </Link>
           </div>
         </div>
       </section>
-      <div className="shell case-bottom">
-        <Link className="text-link" to="/#projects">
-          ← {t.casePage.back}
-        </Link>
-      </div>
+      <section className="case-bottom" aria-label="Case navigation">
+        <div className="shell case-bottom-inner">
+          <Link className="text-link link-back" to="/#projects">
+            <span className="link-arrow" aria-hidden="true">
+              ←
+            </span>
+            {t.casePage.back}
+          </Link>
+          <Link className="text-link" to={'/projects/' + other.slug}>
+            {t.casePage.other}: {t.projects[other.slug].title}
+            <span className="link-arrow" aria-hidden="true">
+              →
+            </span>
+          </Link>
+        </div>
+      </section>
     </article>
   );
 }

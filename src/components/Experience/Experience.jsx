@@ -14,7 +14,8 @@ export function Experience({ content }) {
           <h2>{content.title}</h2>
         </div>
         <ol className="experience-timeline">
-          {content.entries.map((entry, index) => {
+          {/* Chronological reading on the horizontal rail: past (left) → present (right). */}
+          {[...content.entries].reverse().map((entry, index) => {
             const isCurrent = CURRENT.test(entry.period);
             return (
               <li

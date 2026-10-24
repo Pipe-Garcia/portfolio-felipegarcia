@@ -95,7 +95,10 @@ export default function App() {
               <section className="section shell not-found">
                 <h1 tabIndex={-1}>{t.casePage.notFound}</h1>
                 <Link className="text-link" to="/#projects">
-                  {t.casePage.back} →
+                  {t.casePage.back}
+                  <span className="link-arrow" aria-hidden="true">
+                    →
+                  </span>
                 </Link>
               </section>
             }
