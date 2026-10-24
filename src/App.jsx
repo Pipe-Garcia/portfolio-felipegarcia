@@ -62,7 +62,12 @@ export default function App() {
             path="/"
             element={
               <>
-                <Hero content={t.hero} language={language} links={siteLinks} />
+                <Hero
+                  content={t.hero}
+                  language={language}
+                  links={siteLinks}
+                  projectCopy={t.projects}
+                />
                 <ProofStrip items={t.proof} />
                 <SelectedWork
                   content={t.selectedWork}

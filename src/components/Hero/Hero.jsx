@@ -1,22 +1,26 @@
 import { getCvLinkByLanguage } from '../../data/links';
 import { Icon } from '../Icon/Icon';
+import { ProductVisual } from '../SelectedWork/SelectedWork';
+import { projects } from '../../data/projects';
 
-export function Hero({ content, language, links }) {
+export function Hero({ content, language, links, projectCopy }) {
+  const showcase = projects.find((project) => project.slug === 'gymplanner');
+  const showcaseCopy = projectCopy?.['gymplanner'];
   return (
     <section id="hero" className="hero">
       <div className="shell hero-inner">
-        <div className="hero-meta">
-          <p className="status">
-            <span className="status-dot" aria-hidden="true" />
-            {content.status}
-          </p>
-          <span className="hero-edition" aria-hidden="true">
-            PORTFOLIO / 2026
-          </span>
-        </div>
-        <p className="section-eyebrow">{content.eyebrow}</p>
-        <h1 tabIndex={-1}>{content.title}</h1>
-        <div className="hero-bottom">
+        <div className="hero-text">
+          <div className="hero-meta">
+            <p className="status">
+              <span className="status-dot" aria-hidden="true" />
+              {content.status}
+            </p>
+            <span className="hero-edition" aria-hidden="true">
+              PORTFOLIO / 2026
+            </span>
+          </div>
+          <p className="section-eyebrow">{content.eyebrow}</p>
+          <h1 tabIndex={-1}>{content.title}</h1>
           <p className="hero-description">{content.description}</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#projects">
@@ -24,7 +28,7 @@ export function Hero({ content, language, links }) {
               <Icon name="arrow" />
             </a>
             <a
-              className="button button-secondary action-cv"
+              className="action-cv"
               href={getCvLinkByLanguage(language)}
               aria-label={content.cvCta}
               title={content.cvCta}
@@ -45,6 +49,12 @@ export function Hero({ content, language, links }) {
             </a>
           </div>
         </div>
+        {showcase && showcaseCopy && (
+          <div className="hero-visual">
+            <span className="hero-visual-grid" aria-hidden="true" />
+            <ProductVisual project={showcase} copy={showcaseCopy} eager />
+          </div>
+        )}
       </div>
     </section>
   );

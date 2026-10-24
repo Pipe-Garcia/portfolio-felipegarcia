@@ -55,7 +55,7 @@ export function Header({
             label={navigation.themeLabel[theme]}
           />
           <a
-            className="button button-small button-primary desktop-cv"
+            className="cv-utility desktop-cv"
             href={getCvLinkByLanguage(language)}
             aria-label={navigation.cv}
             title={navigation.cv}
