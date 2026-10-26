@@ -14,13 +14,20 @@ import { ProjectCaseStudy } from './components/ProjectCaseStudy/ProjectCaseStudy
 import { siteLinks } from './data/links';
 import { useLanguage } from './hooks/useLanguage';
 import { useTheme } from './hooks/useTheme';
+import { useReveal } from './hooks/useReveal';
+import { useScrollSpy } from './hooks/useScrollSpy';
 import { getTranslation } from './i18n';
+
+// Section ids tracked by the desktop scrollspy (mirror of the nav anchors).
+const SECTION_IDS = ['projects', 'experience', 'stack', 'about', 'contact'];
 
 export default function App() {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const t = getTranslation(language);
   const location = useLocation();
+  useReveal();
+  const activeSection = useScrollSpy(SECTION_IDS);
 
   useEffect(() => {
     // Runs after the target route mounts, including cross-page anchor navigation.
@@ -55,6 +62,7 @@ export default function App() {
         theme={theme}
         onThemeToggle={toggleTheme}
         links={siteLinks}
+        activeSection={activeSection}
       />
       <main id="main" tabIndex={-1}>
         <Routes>

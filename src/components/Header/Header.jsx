@@ -13,6 +13,7 @@ export function Header({
   theme,
   onThemeToggle,
   links,
+  activeSection,
 }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -36,7 +37,16 @@ export function Header({
         </Link>
         <nav className="site-nav" aria-label={navigation.label}>
           {navigation.items.map((item) => (
-            <Link key={item.href} to={'/' + item.href}>
+            <Link
+              key={item.href}
+              to={'/' + item.href}
+              className={
+                activeSection === item.href.slice(1) ? 'is-active' : undefined
+              }
+              aria-current={
+                activeSection === item.href.slice(1) ? 'true' : undefined
+              }
+            >
               {item.label}
             </Link>
           ))}

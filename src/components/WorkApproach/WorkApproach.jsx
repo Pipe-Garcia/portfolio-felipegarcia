@@ -2,11 +2,11 @@ export function WorkApproach({ content }) {
   return (
     <section id="approach" className="section approach-section">
       <div className="shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
         </div>
-        <ol className="build-steps">
+        <ol className="build-steps" data-reveal>
           {content.steps.map(([title, description], index) => (
             <li key={title}>
               <span className="step-number" aria-hidden="true">
@@ -19,7 +19,9 @@ export function WorkApproach({ content }) {
             </li>
           ))}
         </ol>
-        <p className="approach-closing">{content.closing}</p>
+        <p className="approach-closing" data-reveal>
+          {content.closing}
+        </p>
       </div>
     </section>
   );

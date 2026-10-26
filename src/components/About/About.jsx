@@ -2,12 +2,12 @@ export function About({ content }) {
   return (
     <section id="about" className="section about-section">
       <div className="shell about-grid">
-        <div className="about-aside">
+        <div className="about-aside" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
         </div>
         <div className="about-body">
-          <div className="about-copy">
+          <div className="about-copy" data-reveal>
             {content.paragraphs.map((paragraph, index) => (
               <p
                 key={paragraph}

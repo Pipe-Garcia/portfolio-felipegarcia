@@ -64,13 +64,15 @@ export function SelectedWork({ content, projectCopy }) {
   return (
     <section id="projects" className="section selected-work">
       <div className="shell">
-        <div className="section-heading section-heading-wide">
+        <div className="section-heading section-heading-wide" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
           <p>{content.description}</p>
         </div>
         {projects.map((project, index) => {
           const copy = projectCopy[project.slug];
+          const textFrom = index === 0 ? 'left' : 'right';
+          const visualFrom = index === 0 ? 'right' : 'left';
           return (
             <article
               key={project.slug}
@@ -81,7 +83,11 @@ export function SelectedWork({ content, projectCopy }) {
                   : 'project-flagship')
               }
             >
-              <div className="project-copy">
+              <div
+                className="project-copy"
+                data-reveal={textFrom}
+                style={{ '--reveal-delay': '0ms' }}
+              >
                 <div className="project-topline">
                   <ProjectBadges project={project} />
                 </div>
@@ -132,6 +138,8 @@ export function SelectedWork({ content, projectCopy }) {
                 to={'/projects/' + project.slug}
                 className="product-link"
                 aria-label={content.visualLabel + ': ' + copy.title}
+                data-reveal={visualFrom}
+                style={{ '--reveal-delay': '90ms' }}
               >
                 <ProductVisual project={project} copy={copy} />
               </Link>

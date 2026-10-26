@@ -22,12 +22,12 @@ export function Expertise({ content }) {
   return (
     <section id="stack" className="section capabilities-section">
       <div className="shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
           <p>{content.intro}</p>
         </div>
-        <div className="capabilities-grid">
+        <div className="capabilities-grid" data-reveal>
           {capabilities.map((group) =>
             compact ? (
               <details key={group.title} className="capability-accordion">

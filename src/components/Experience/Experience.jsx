@@ -9,11 +9,11 @@ export function Experience({ content }) {
   return (
     <section id="experience" className="section experience-section">
       <div className="shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
           <h2>{content.title}</h2>
         </div>
-        <ol className="experience-timeline">
+        <ol className="experience-timeline" data-reveal>
           {/* Chronological reading on the horizontal rail: past (left) → present (right). */}
           {[...content.entries].reverse().map((entry, index) => {
             const isCurrent = CURRENT.test(entry.period);

@@ -7,7 +7,11 @@ export function ProofStrip({ items }) {
     <div className="proof-strip">
       <dl className="shell proof-grid">
         {items.map((item, index) => (
-          <div key={item.title}>
+          <div
+            key={item.title}
+            data-reveal
+            style={{ '--reveal-delay': index * 80 + 'ms' }}
+          >
             <dt>
               <Icon name={PROOF_ICONS[index]} />
               {item.title}

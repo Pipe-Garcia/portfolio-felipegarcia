@@ -4,7 +4,7 @@ import { Icon } from '../Icon/Icon';
 export function Contact({ content, links, language }) {
   return (
     <section id="contact" className="section contact-section">
-      <div className="shell contact-closing">
+      <div className="shell contact-closing" data-reveal>
         <p className="section-eyebrow">{content.label}</p>
         <h2 className="contact-statement">{content.title}</h2>
         <p className="contact-description">{content.description}</p>

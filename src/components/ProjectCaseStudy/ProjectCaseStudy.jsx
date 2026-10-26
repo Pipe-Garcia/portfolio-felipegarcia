@@ -47,7 +47,7 @@ export function ProjectCaseStudy({ translations: t }) {
         )}
         <ProductVisual project={project} copy={copy} eager />
       </section>
-      <section className="section case-content">
+      <section className="section case-content" data-reveal>
         <div className="shell case-layout">
           <div className="case-narrative">
             {copy.caseStudy.map((section) => (
@@ -76,7 +76,7 @@ export function ProjectCaseStudy({ translations: t }) {
           </aside>
         </div>
       </section>
-      <section className="section case-gallery">
+      <section className="section case-gallery" data-reveal>
         <div className="shell">
           <div className="section-heading">
             <p className="section-eyebrow">PRODUCT</p>
@@ -91,7 +91,7 @@ export function ProjectCaseStudy({ translations: t }) {
           {copy.mediaNote && <p className="media-note">{copy.mediaNote}</p>}
         </div>
       </section>
-      <section className="section case-outcome">
+      <section className="section case-outcome" data-reveal>
         <div className="shell about-layout">
           <div className="section-heading">
             <p className="section-eyebrow">OUTCOME</p>

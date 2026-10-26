@@ -364,30 +364,58 @@ h3 {
 .site-nav a:focus-visible::after {
   width: 100%;
 }
+/* Scrollspy active marker: accent color + a short centered accent segment. */
+.site-nav a.is-active {
+  color: var(--accent);
+}
+.site-nav a.is-active::after {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+}
 .site-header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+/* Segmented ES / EN / PT control — one semantic pill, not three loose links. */
 .language-switcher {
-  display: flex;
-  gap: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--accent-soft);
 }
 .language-switcher button {
-  min-height: 44px;
-  min-width: 36px;
-  padding: 0 7px;
+  min-height: 30px;
+  min-width: 34px;
+  padding: 0 10px;
   border: 0;
+  border-radius: 999px;
   background: transparent;
   font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
+  transition:
+    background var(--transition),
+    color var(--transition);
 }
 .language-switcher button.is-active {
+  background: var(--surface-strong);
   color: var(--accent);
-  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
-.language-switcher button:hover {
+.language-switcher button:not(.is-active):hover {
   color: var(--text-primary);
+}
+/* The mobile drawer keeps the same control, just with roomier touch targets. */
+.drawer-bottom .language-switcher button {
+  min-height: 40px;
+  min-width: 46px;
+  font-size: 12px;
 }
 .theme-toggle {
   color: var(--accent);
@@ -867,7 +895,9 @@ dialog::backdrop {
 
 /* Engineering: one horizontal chronological rail. */
 .experience-section {
-  background: var(--surface-experience);
+  background:
+    linear-gradient(to bottom, var(--surface-work), transparent 120px),
+    var(--surface-experience);
 }
 .experience-section .section-heading h2 {
   font-size: clamp(30px, 2.8vw, 38px);
@@ -1070,7 +1100,9 @@ dialog::backdrop {
 }
 /* About: an editorial narrative — engineering transitioning to the person. */
 .about-section {
-  background: var(--surface-warm);
+  background:
+    linear-gradient(to bottom, var(--surface-engineering), transparent 120px),
+    var(--surface-warm);
   padding-block: 80px;
 }
 .about-layout {
@@ -1470,6 +1502,219 @@ dialog::backdrop {
   font-size: 10px;
 }
 
+/* ============================================================
+   Motion system — scroll reveals + Hero choreography.
+   Hidden states are gated on the `.js` class (added in main.jsx),
+   so the page stays fully visible without JS or under reduced motion.
+   ============================================================ */
+
+/* Generic reveal: fade + rise, once, when .is-revealed is added. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 520ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 520ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js [data-reveal='left'] {
+  transform: translateX(-18px);
+}
+.js [data-reveal='right'] {
+  transform: translateX(18px);
+}
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered groups: the container does not fade itself; its direct children
+   cascade in with a short nth-child delay (eyebrow → title → copy …). */
+.js .section-heading[data-reveal],
+.js .about-aside[data-reveal],
+.js .about-copy[data-reveal],
+.js .contact-closing[data-reveal],
+.js .experience-timeline[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+.js .section-heading[data-reveal] > *,
+.js .about-aside[data-reveal] > *,
+.js .about-copy[data-reveal] > *,
+.js .contact-closing[data-reveal] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 480ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 480ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.js .section-heading.is-revealed > *,
+.js .about-aside.is-revealed > *,
+.js .about-copy.is-revealed > *,
+.js .contact-closing.is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.js .section-heading.is-revealed > *:nth-child(1),
+.js .about-aside.is-revealed > *:nth-child(1),
+.js .about-copy.is-revealed > *:nth-child(1),
+.js .contact-closing.is-revealed > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.js .section-heading.is-revealed > *:nth-child(2),
+.js .about-aside.is-revealed > *:nth-child(2),
+.js .about-copy.is-revealed > *:nth-child(2),
+.js .contact-closing.is-revealed > *:nth-child(2) {
+  transition-delay: 80ms;
+}
+.js .section-heading.is-revealed > *:nth-child(3),
+.js .about-copy.is-revealed > *:nth-child(3),
+.js .contact-closing.is-revealed > *:nth-child(3) {
+  transition-delay: 150ms;
+}
+.js .contact-closing.is-revealed > *:nth-child(4) {
+  transition-delay: 220ms;
+}
+.js .contact-closing.is-revealed > *:nth-child(5) {
+  transition-delay: 280ms;
+}
+.js .contact-closing.is-revealed > *:nth-child(n + 6) {
+  transition-delay: 340ms;
+}
+
+/* Experience: the rail draws left → right, then nodes and cards appear in
+   chronological order (past on the left, present on the right). */
+.js .experience-timeline::before {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 700ms cubic-bezier(0.2, 0.65, 0.25, 1) 120ms;
+}
+.js .experience-timeline.is-revealed::before {
+  transform: scaleX(1);
+}
+.js .exp-card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 480ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 480ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.js .exp-stem {
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.js .exp-node {
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+.js .experience-timeline.is-revealed .exp-card,
+.js .experience-timeline.is-revealed .exp-stem {
+  opacity: 1;
+  transform: none;
+}
+.js .experience-timeline.is-revealed .exp-node {
+  opacity: 1;
+}
+.js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-node {
+  transition-delay: 320ms;
+}
+.js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-card,
+.js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-stem {
+  transition-delay: 420ms;
+}
+.js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-node {
+  transition-delay: 480ms;
+}
+.js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-card,
+.js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-stem {
+  transition-delay: 580ms;
+}
+
+/* Within a Selected Work visual, the mobile screenshot settles just after the
+   desktop frame. */
+.js .product-responsive .mobile-screen {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 420ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 420ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.js .product-link.is-revealed .mobile-screen {
+  opacity: 1;
+  transform: none;
+  transition-delay: 160ms;
+}
+
+/* About pull-quote: the accent rule grows from the top. */
+.js .about-principle {
+  position: relative;
+  border-left: 0;
+}
+.js .about-principle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 620ms cubic-bezier(0.2, 0.65, 0.25, 1) 120ms;
+}
+.js .about-copy.is-revealed .about-principle::after {
+  transform: scaleY(1);
+}
+
+/* Hero: a quick, coordinated load entrance — runs once on mount. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-visual-rise {
+  from {
+    opacity: 0;
+    transform: translateX(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.js .hero-meta,
+.js .hero .section-eyebrow,
+.js .hero h1,
+.js .hero-description,
+.js .hero-actions {
+  animation: hero-rise 540ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
+}
+.js .hero-meta {
+  animation-delay: 40ms;
+}
+.js .hero .section-eyebrow {
+  animation-delay: 100ms;
+}
+.js .hero h1 {
+  animation-delay: 160ms;
+}
+.js .hero-description {
+  animation-delay: 250ms;
+}
+.js .hero-actions {
+  animation-delay: 340ms;
+}
+.js .hero-visual {
+  animation: hero-visual-rise 600ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
+  animation-delay: 440ms;
+}
+
 /* Tablet: keep useful horizontal structure while giving product previews more space. */
 @media (max-width: 1099px) {
   .shell {
@@ -1841,6 +2086,28 @@ dialog::backdrop {
   .experience-timeline .text-link {
     min-height: 44px;
   }
+  /* Vertical timeline: the rail grows top → bottom, items follow in order. */
+  .js .experience-timeline::before {
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+  .js .experience-timeline.is-revealed::before {
+    transform: scaleY(1);
+  }
+  .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-node {
+    transition-delay: 240ms;
+  }
+  .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-card,
+  .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-stem {
+    transition-delay: 320ms;
+  }
+  .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-node {
+    transition-delay: 400ms;
+  }
+  .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-card,
+  .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-stem {
+    transition-delay: 480ms;
+  }
   .capabilities-grid {
     display: block;
   }
@@ -2058,5 +2325,22 @@ dialog::backdrop {
   .text-link.link-back:hover .link-arrow,
   .footer-top:hover {
     transform: none;
+  }
+  /* Under reduced motion every reveal state collapses to fully visible. */
+  .js [data-reveal],
+  .js .exp-card,
+  .js .exp-stem,
+  .js .exp-node,
+  .js .product-responsive .mobile-screen,
+  .js .section-heading[data-reveal] > *,
+  .js .about-aside[data-reveal] > *,
+  .js .about-copy[data-reveal] > *,
+  .js .contact-closing[data-reveal] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .js .experience-timeline::before,
+  .js .about-principle::after {
+    transform: none !important;
   }
 }
