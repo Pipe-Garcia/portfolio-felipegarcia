@@ -11,7 +11,7 @@ export function Experience({ content }) {
       <div className="shell">
         <div className="section-heading" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
-          <h2>{content.title}</h2>
+          <h2 className="reveal-mask">{content.title}</h2>
         </div>
         <ol className="experience-timeline" data-reveal>
           {/* Chronological reading on the horizontal rail: past (left) → present (right). */}

@@ -184,12 +184,36 @@ h3 {
   transform: translateX(4px);
 }
 .button-primary {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   color: var(--accent-contrast);
-  background: var(--accent);
+  background: transparent;
   border-color: var(--accent);
 }
-.button-primary:hover {
+/* Resting fill sits behind the label; the sweep layer slides over it on hover. */
+.button-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+}
+.button-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--accent-hover);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.button-primary:hover::after,
+.button-primary:focus-visible::after {
+  transform: scaleX(1);
+}
+.button-primary:hover {
   border-color: var(--accent-hover);
 }
 .button-secondary {
@@ -880,6 +904,33 @@ dialog::backdrop {
   width: 100%;
   height: auto;
 }
+
+/* Subtle micro-depth on hover for major product visuals — desktop pointer only.
+   A faint scale and border lift make the screenshot feel tactile, never tilted. */
+@media (hover: hover) {
+  .screen-frame,
+  .hero-product-desktop {
+    transition:
+      transform 250ms cubic-bezier(0.2, 0.65, 0.25, 1),
+      border-color 250ms ease,
+      box-shadow 250ms ease;
+  }
+  .product-link:hover .screen-frame,
+  .product-link:focus-visible .screen-frame,
+  .hero-visual:hover .hero-product-desktop,
+  .hero-visual:focus-within .hero-product-desktop {
+    transform: scale(1.012);
+    border-color: var(--accent);
+  }
+  .product-link .mobile-screen,
+  .hero-product-mobile {
+    transition: transform 250ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  }
+  .js .product-link.is-revealed:hover .mobile-screen,
+  .js .hero-visual:hover .hero-product-mobile {
+    transform: translateY(-3px);
+  }
+}
 .project-reverse {
   grid-template-columns: 0.8fr 1.2fr;
   gap: 72px;
@@ -929,9 +980,12 @@ dialog::backdrop {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
+  /* Margin-based centering with whole-pixel offsets avoids the sub-pixel
+     transform rounding that misaligns a 1px stem against the node. */
+  margin-left: -6px;
+  margin-top: -6px;
   border-radius: 50%;
   border: 2px solid var(--accent);
   background: var(--surface-engineering);
@@ -944,9 +998,9 @@ dialog::backdrop {
 .exp-stem {
   position: absolute;
   left: 50%;
-  width: 1px;
+  width: 2px;
+  margin-left: -1px;
   background: var(--border-strong);
-  transform: translateX(-50%);
   z-index: 1;
 }
 .exp-above .exp-stem {
@@ -1529,6 +1583,34 @@ dialog::backdrop {
   transform: none;
 }
 
+/* Product-visual clip reveals: a horizontal wipe + subtle scale that opens the
+   real screenshot like a curtain, stronger than the directional fade. */
+.js [data-reveal='clip-right'] {
+  opacity: 0;
+  transform: scale(0.97);
+  clip-path: inset(0 0 0 100%);
+}
+.js [data-reveal='clip-left'] {
+  opacity: 0;
+  transform: scale(0.97);
+  clip-path: inset(0 100% 0 0);
+}
+.js [data-reveal='clip-right'],
+.js [data-reveal='clip-left'] {
+  transition:
+    opacity 640ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 640ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    clip-path 640ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, clip-path;
+}
+.js [data-reveal='clip-right'].is-revealed,
+.js [data-reveal='clip-left'].is-revealed {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
 /* Staggered groups: the container does not fade itself; its direct children
    cascade in with a short nth-child delay (eyebrow → title → copy …). */
 .js .section-heading[data-reveal],
@@ -1539,22 +1621,42 @@ dialog::backdrop {
   opacity: 1;
   transform: none;
 }
-.js .section-heading[data-reveal] > *,
-.js .about-aside[data-reveal] > *,
-.js .about-copy[data-reveal] > *,
-.js .contact-closing[data-reveal] > * {
+.js .section-heading[data-reveal] > *:not(.reveal-mask),
+.js .about-aside[data-reveal] > *:not(.reveal-mask),
+.js .about-copy[data-reveal] > *:not(.reveal-mask),
+.js .contact-closing[data-reveal] > *:not(.reveal-mask) {
   opacity: 0;
   transform: translateY(14px);
   transition:
     opacity 480ms cubic-bezier(0.2, 0.65, 0.25, 1),
     transform 480ms cubic-bezier(0.2, 0.65, 0.25, 1);
 }
-.js .section-heading.is-revealed > *,
-.js .about-aside.is-revealed > *,
-.js .about-copy.is-revealed > *,
-.js .contact-closing.is-revealed > * {
+.js .section-heading.is-revealed > *:not(.reveal-mask),
+.js .about-aside.is-revealed > *:not(.reveal-mask),
+.js .about-copy.is-revealed > *:not(.reveal-mask),
+.js .contact-closing.is-revealed > *:not(.reveal-mask) {
   opacity: 1;
   transform: none;
+}
+
+/* Editorial mask reveal for major serif headings: the heading is clipped from
+   the top and rises into place, like a magazine headline being uncovered. The
+   clip relaxes to inset(0) so descenders/ascenders are never permanently cut. */
+.js .reveal-mask {
+  opacity: 0;
+  transform: translateY(24px);
+  clip-path: inset(0 0 100% 0);
+  transition:
+    opacity 620ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    transform 620ms cubic-bezier(0.2, 0.65, 0.25, 1),
+    clip-path 620ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition-delay: var(--reveal-delay, 100ms);
+  will-change: opacity, transform, clip-path;
+}
+.js .is-revealed > .reveal-mask {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
 }
 .js .section-heading.is-revealed > *:nth-child(1),
 .js .about-aside.is-revealed > *:nth-child(1),
@@ -1588,7 +1690,7 @@ dialog::backdrop {
 .js .experience-timeline::before {
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 700ms cubic-bezier(0.2, 0.65, 0.25, 1) 120ms;
+  transition: transform 820ms cubic-bezier(0.2, 0.65, 0.25, 1) 100ms;
 }
 .js .experience-timeline.is-revealed::before {
   transform: scaleX(1);
@@ -1617,18 +1719,18 @@ dialog::backdrop {
   opacity: 1;
 }
 .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-node {
-  transition-delay: 320ms;
+  transition-delay: 340ms;
 }
 .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-card,
 .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-stem {
-  transition-delay: 420ms;
+  transition-delay: 440ms;
 }
 .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-node {
-  transition-delay: 480ms;
+  transition-delay: 720ms;
 }
 .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-card,
 .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-stem {
-  transition-delay: 580ms;
+  transition-delay: 820ms;
 }
 
 /* Within a Selected Work visual, the mobile screenshot settles just after the
@@ -1678,10 +1780,36 @@ dialog::backdrop {
     transform: none;
   }
 }
-@keyframes hero-visual-rise {
+/* Major heading mask reveal on load: clipped from the top, rising into place. */
+@keyframes hero-mask {
   from {
     opacity: 0;
-    transform: translateX(18px) scale(0.985);
+    transform: translateY(24px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+/* Product visual: a restrained horizontal clip opens while the image settles. */
+@keyframes hero-visual-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes hero-mobile-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -1690,7 +1818,6 @@ dialog::backdrop {
 }
 .js .hero-meta,
 .js .hero .section-eyebrow,
-.js .hero h1,
 .js .hero-description,
 .js .hero-actions {
   animation: hero-rise 540ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
@@ -1702,6 +1829,7 @@ dialog::backdrop {
   animation-delay: 100ms;
 }
 .js .hero h1 {
+  animation: hero-mask 640ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
   animation-delay: 160ms;
 }
 .js .hero-description {
@@ -1711,8 +1839,34 @@ dialog::backdrop {
   animation-delay: 340ms;
 }
 .js .hero-visual {
-  animation: hero-visual-rise 600ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
-  animation-delay: 440ms;
+  animation: hero-visual-reveal 700ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
+  animation-delay: 420ms;
+}
+.js .hero-product-mobile {
+  animation: hero-mobile-reveal 420ms cubic-bezier(0.2, 0.65, 0.25, 1) backwards;
+  animation-delay: 980ms;
+}
+
+/* ============================================================
+   Route transitions — native View Transition API cross-fade.
+   The API is invoked from App.jsx; where it is unsupported, navigation
+   behaves normally. A brief 280ms cross-fade softens the route swap.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-fade-out 280ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-fade-in 280ms cubic-bezier(0.2, 0.65, 0.25, 1) both;
+  }
+}
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Tablet: keep useful horizontal structure while giving product previews more space. */
@@ -2065,6 +2219,7 @@ dialog::backdrop {
     grid-row: 1;
     justify-self: center;
     align-self: start;
+    margin-left: 0;
     margin-top: 5px;
   }
   .exp-node.is-active {
@@ -2095,18 +2250,18 @@ dialog::backdrop {
     transform: scaleY(1);
   }
   .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-node {
-    transition-delay: 240ms;
+    transition-delay: 300ms;
   }
   .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-card,
   .js .experience-timeline.is-revealed .exp-item:nth-child(1) .exp-stem {
-    transition-delay: 320ms;
+    transition-delay: 400ms;
   }
   .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-node {
-    transition-delay: 400ms;
+    transition-delay: 640ms;
   }
   .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-card,
   .js .experience-timeline.is-revealed .exp-item:nth-child(2) .exp-stem {
-    transition-delay: 480ms;
+    transition-delay: 740ms;
   }
   .capabilities-grid {
     display: block;
@@ -2328,6 +2483,7 @@ dialog::backdrop {
   }
   /* Under reduced motion every reveal state collapses to fully visible. */
   .js [data-reveal],
+  .js .reveal-mask,
   .js .exp-card,
   .js .exp-stem,
   .js .exp-node,
@@ -2338,6 +2494,12 @@ dialog::backdrop {
   .js .contact-closing[data-reveal] > * {
     opacity: 1 !important;
     transform: none !important;
+  }
+  /* Clip-path reveals must relax to nothing so content is never trapped hidden. */
+  .js [data-reveal],
+  .js .reveal-mask,
+  .js .hero-visual {
+    clip-path: none !important;
   }
   .js .experience-timeline::before,
   .js .about-principle::after {

@@ -66,13 +66,13 @@ export function SelectedWork({ content, projectCopy }) {
       <div className="shell">
         <div className="section-heading section-heading-wide" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
-          <h2>{content.title}</h2>
+          <h2 className="reveal-mask">{content.title}</h2>
           <p>{content.description}</p>
         </div>
         {projects.map((project, index) => {
           const copy = projectCopy[project.slug];
           const textFrom = index === 0 ? 'left' : 'right';
-          const visualFrom = index === 0 ? 'right' : 'left';
+          const visualFrom = index === 0 ? 'clip-right' : 'clip-left';
           return (
             <article
               key={project.slug}

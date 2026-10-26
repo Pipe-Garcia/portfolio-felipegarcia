@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Hero } from './components/Hero/Hero';
@@ -26,18 +27,48 @@ export default function App() {
   const { theme, toggleTheme } = useTheme();
   const t = getTranslation(language);
   const location = useLocation();
-  useReveal();
-  const activeSection = useScrollSpy(SECTION_IDS);
+  // Routes render against this, which lags one frame behind `location` when a
+  // native View Transition is in flight, so the old/new DOM snapshots bracket
+  // the cross-fade. Without View Transition support it tracks `location` 1:1.
+  const [renderedLocation, setRenderedLocation] = useState(location);
+  const firstRender = useRef(true);
+  // Reveal + scrollspy key off the location the router has actually rendered,
+  // so they (re)observe the DOM that is on screen — including after a route
+  // transition that lags one frame behind the real `location`.
+  useReveal(renderedLocation);
+  const activeSection = useScrollSpy(SECTION_IDS, renderedLocation);
 
   useEffect(() => {
     // Runs after the target route mounts, including cross-page anchor navigation.
-    if (location.hash) {
-      document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    if (renderedLocation.hash) {
+      document.getElementById(renderedLocation.hash.slice(1))?.scrollIntoView();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
       document.querySelector('main h1')?.focus({ preventScroll: true });
     }
-  }, [location.pathname, location.hash, location.key]);
+  }, [renderedLocation.pathname, renderedLocation.hash, renderedLocation.key]);
+
+  // Progressive-enhanced route transition: use the native View Transition API
+  // when available and motion is allowed, otherwise swap routes immediately.
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    if (
+      typeof document.startViewTransition !== 'function' ||
+      prefersReduced
+    ) {
+      setRenderedLocation(location);
+      return;
+    }
+    document.startViewTransition(() => {
+      flushSync(() => setRenderedLocation(location));
+    });
+  }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const title = t.projects[location.pathname.split('/')[2]]?.title;
@@ -65,7 +96,7 @@ export default function App() {
         activeSection={activeSection}
       />
       <main id="main" tabIndex={-1}>
-        <Routes>
+        <Routes location={renderedLocation}>
           <Route
             path="/"
             element={

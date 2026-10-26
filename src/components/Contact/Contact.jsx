@@ -6,7 +6,7 @@ export function Contact({ content, links, language }) {
     <section id="contact" className="section contact-section">
       <div className="shell contact-closing" data-reveal>
         <p className="section-eyebrow">{content.label}</p>
-        <h2 className="contact-statement">{content.title}</h2>
+        <h2 className="contact-statement reveal-mask">{content.title}</h2>
         <p className="contact-description">{content.description}</p>
         <a className="button button-primary contact-cta" href={links.email.href}>
           <Icon name="email" />

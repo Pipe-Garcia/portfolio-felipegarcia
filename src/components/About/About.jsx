@@ -4,7 +4,7 @@ export function About({ content }) {
       <div className="shell about-grid">
         <div className="about-aside" data-reveal>
           <p className="section-eyebrow">{content.label}</p>
-          <h2>{content.title}</h2>
+          <h2 className="reveal-mask">{content.title}</h2>
         </div>
         <div className="about-body">
           <div className="about-copy" data-reveal>

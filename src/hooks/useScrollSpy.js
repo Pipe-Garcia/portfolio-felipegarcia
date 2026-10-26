@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 // Tracks which section is currently centered in the viewport and returns its
 // id, or null when not on the home route. Uses a thin IntersectionObserver band
 // (the middle ~10% of the viewport) and holds the last active section between
 // gaps, so the indicator stays stable near section boundaries.
-export function useScrollSpy(sectionIds) {
-  const location = useLocation();
+//
+// `location` is the location the router has actually rendered (which may lag
+// one frame behind the real location during a View Transition), so the
+// observer is (re)built against the DOM that is currently on screen.
+export function useScrollSpy(sectionIds, location) {
   const [active, setActive] = useState(null);
   useEffect(() => {
     if (location.pathname !== '/' || !('IntersectionObserver' in window)) {
